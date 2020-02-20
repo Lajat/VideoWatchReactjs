@@ -38,13 +38,15 @@ class VideoCard extends Component {
     onVideoCardClicked = (e) => {
         console.log("Video Card Clicked");
         let clickedItem = e.target.getAttribute('datakey');
+        // e.target.setAttribute(style, {border:"2px solid yellow"});
+        // document.getElementsByclassName("wrapper1")[0].setAttribute("class", "democlass");
         for(let i=0;i<this.state.videodata.length;i++){
             if(clickedItem === this.state.videodata[i].id){
                 this.setState({videoId: this.state.videodata[i].vimeoId});
                 this.setState({title: this.state.videodata[i].title});
                 this.setState({description: this.state.videodata[i].description});
                 this.setState({position: i});
-                this.setState({border:"2px solid yellow"});
+                // this.setState({border:"2px solid yellow"});
 
                 if(this.state.videodata[i].isLiked === true || this.state.videodata[i].isLiked === "true"){
                     this.setState({like:"yellow"});
@@ -71,24 +73,32 @@ class VideoCard extends Component {
     onLikeIconClicked = () => {
         if(this.state.like === "yellow") {
             this.setState({like:"black"});
+            this.state.videodata[this.state.position].isLiked = "false";
+            this.setState({videodata: this.state.videodata});
         }
         else {
             this.setState({like:"yellow"});
+            this.state.videodata[this.state.position].isLiked = "true";
+            this.setState({videodata: this.state.videodata});
         }
     }
     onBookmarkIconClicked = () => {
         if(this.state.bookmark === "yellow") {
             this.setState({bookmark:"black"});
+            this.state.videodata[this.state.position].isSaved = "false";
+            this.setState({videodata: this.state.videodata});
         }
         else {
             this.setState({bookmark:"yellow"});
+            this.state.videodata[this.state.position].isSaved = "true";
+            this.setState({videodata: this.state.videodata});
         }
     }
 
     render() {
         const VideoCards = this.state.videolist.map((items,pos) => {
             return (
-                    <div style={{border: this.state.border}} key={pos} onClick={this.onVideoCardClicked} className={classes.wrapper1} datakey={items.id}>
+                    <div key={pos} onClick={this.onVideoCardClicked} className={classes.wrapper1} datakey={items.id}>
                         <img className={classes.thumbnail} src={items.thumbnail} datakey={items.id}></img>
                         <h4 className={classes.title} datakey={items.id}>{items.title}</h4>
                     </div>
