@@ -98,7 +98,7 @@ class VideoCard extends Component {
     render() {
         const VideoCards = this.state.videolist.map((items,pos) => {
             return (
-                    <div key={pos} onClick={this.onVideoCardClicked} className={classes.wrapper1} datakey={items.id}>
+                    <div key={pos} onClick={this.onVideoCardClicked} className={[classes.wrapper1, pos === this.state.position ? classes.colourCard : null].join(' ')} datakey={items.id}>
                         <img className={classes.thumbnail} src={items.thumbnail} datakey={items.id}></img>
                         <h4 className={classes.title} datakey={items.id}>{items.title}</h4>
                     </div>

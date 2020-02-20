@@ -70,8 +70,11 @@ body {
     margin-bottom: 15px;
     cursor: pointer;
 }
-.wrapper1:first-of-type {
+/* .wrapper1:first-of-type {
   border: 2px solid gray;
+} */
+.colourCard {
+    border: 2px solid yellow;
 }
 /* .democlass {
     background-color: white;
