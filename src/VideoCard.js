@@ -9,7 +9,7 @@ class VideoCard extends Component {
         videodata: [],
         position: 0,
         videoId: "190062231",
-        views: "22.5k",
+        views: "22.5K views",
         title: "Croissants | Flour and Stone",
         description: "There is no other way but to commit wholeheartedly to a relationship with a croissant. We have all found ourselves at the mercy of its allure. Here, in another epic film by the uber talented Nathan Rodger, our Erin divulges her personal romance with The Croissant.",
         like: "yellow",
@@ -28,7 +28,6 @@ class VideoCard extends Component {
         Axios.get('https://5d76bf96515d1a0014085cf9.mockapi.io/video')
         .then((res) => {
             this.setState({videodata: [...res.data]})
-            console.log(this.state.videodata);
         })
         .catch((err) => {
             console.log(err);
@@ -38,8 +37,6 @@ class VideoCard extends Component {
     onVideoCardClicked = (e) => {
         console.log("Video Card Clicked");
         let clickedItem = e.target.getAttribute('datakey');
-        // e.target.setAttribute(style, {border:"2px solid yellow"});
-        // document.getElementsByclassName("wrapper1")[0].setAttribute("class", "democlass");
         for(let i=0;i<this.state.videodata.length;i++){
             if(clickedItem === this.state.videodata[i].id){
                 this.setState({videoId: this.state.videodata[i].vimeoId});
@@ -67,6 +64,8 @@ class VideoCard extends Component {
                 this.setState({views: x/1000 +"K" + " views"});
                 if(x.toString().length >=7 && x.toString().length < 10)
                 this.setState({views: (x/1000000).toFixed(2) +"M" + " views"});
+
+                console.log(this.state.views);
             }
         }
     }
@@ -113,7 +112,7 @@ class VideoCard extends Component {
                     <div id={classes.playerDiv}>
                     <iframe id={classes.videoPlayer} src={"https://player.vimeo.com/video/" + this.state.videoId} frameBorder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen ></iframe>
                     <div id={classes.views}>
-                        <p id={classes.viewsInNumber}>{this.state.views + "views"}</p>
+                        <p id={classes.viewsInNumber}>{this.state.views}</p>
                         <div id={classes.icons}>
                             <div><i style={{color:this.state.like}} id={classes.like} onClick={this.onLikeIconClicked} className="fas fa-heart"></i></div>
                             <div><i style={{color:this.state.bookmark}} id={classes.bookmark} onClick={this.onBookmarkIconClicked} className="fas fa-bookmark"></i></div>
